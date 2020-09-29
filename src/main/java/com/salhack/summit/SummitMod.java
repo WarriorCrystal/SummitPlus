@@ -12,12 +12,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-@Mod(modid = "summit", name = "Summit", version = SummitMod.VERSION)
+@Mod(modid = "summit+", name = "Summit+", version = SummitMod.VERSION)
 public final class SummitMod
 {
-    public static final String NAME = "Summit";
-    public static final String VERSION = "beta-v2.2";
-    public static final String WATERMARK = "Summit " + VERSION;
+    public static final String NAME = "Summit+";
+    public static final String VERSION = "beta-v0.1";
+    public static final String WATERMARK = "Summit+ " + VERSION;
 
     public static final Logger log = LogManager.getLogger("sal");
 
