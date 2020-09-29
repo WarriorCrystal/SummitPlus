@@ -13,7 +13,7 @@ public class DiscordManager
     {
         club.minnced.discord.rpc.DiscordRPC lib = club.minnced.discord.rpc.DiscordRPC.INSTANCE;
         // New Summit Discord RPC ID
-        String applicationId = "719958382274019350";
+        String applicationId = "760160378235387935";
         String steamId = "";
         DiscordEventHandlers handlers = new DiscordEventHandlers();
         handlers.ready = (user) -> System.out.println("Ready!");
@@ -23,7 +23,7 @@ public class DiscordManager
         lib.Discord_UpdatePresence(presence);
         // in a worker thread
         presence.largeImageKey = "discordrpc2";
-        presence.largeImageText = "Summit Premium Deluxe++++ Exclusive Gold Founders++ Edition";
+        presence.largeImageText = "Summit+";
         _thread = new Thread(() ->
         {
             while (!Thread.currentThread().isInterrupted())

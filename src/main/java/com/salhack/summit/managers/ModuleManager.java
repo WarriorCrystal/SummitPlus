@@ -1,7 +1,9 @@
 package com.salhack.summit.managers;
 
+import com.salhack.summit.SummitMod;
 import com.salhack.summit.main.Summit;
 import com.salhack.summit.main.SummitStatic;
+import com.salhack.summit.module.bot.CrystalPVPBot;
 import com.salhack.summit.module.combat.*;
 import com.salhack.summit.module.exploit.*;
 import com.salhack.summit.module.misc.*;
@@ -24,21 +26,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.salhack.summit.main.SummitStatic.*;
 
-public class ModuleManager
-{
-    public static ModuleManager Get()
-    {
+public class ModuleManager {
+    public static ModuleManager Get() {
         return Summit.GetModuleManager();
     }
 
-    public ModuleManager()
-    {
+    public ModuleManager() {
     }
 
     public List<Module> Mods = new CopyOnWriteArrayList<>();
-    
-    public void Init()
-    {
+
+    public void Init() {
         /// Combat
 
         Add(new AntiCityBoss());
@@ -60,7 +58,7 @@ public class ModuleManager
         Add(SURROUND = new Surround());
         Add(new Trigger());
         Add(new Velocity());
-        
+
         /// Exploit
         Add(new AntiHunger());
         Add(new CoordTPExploit());
@@ -106,7 +104,7 @@ public class ModuleManager
         Add(new TotemPopNotifier());
         Add(new VisualRange());
         Add(new XCarry());
-        
+
         /// Movement
         Add(AUTOWALK = new AutoWalk());
         Add(BOATFLY = new BoatFly());
@@ -128,7 +126,8 @@ public class ModuleManager
         Add(new Sprint());
         Add(new Yaw());
         Add(new WebSpeed());
-        
+
+
         /// Render
         Add(new AntiFog());
         Add(new BlockHighlight());
@@ -168,7 +167,7 @@ public class ModuleManager
         Add(new HudEditor());
         Add(HUD = new Hud());
         Add(KEYBINDS = new Keybinds());
-        
+
         /// World
         Add(new AutoBuilder());
         Add(new AutoNameTag());
@@ -189,34 +188,31 @@ public class ModuleManager
         Add(STASHLOGGER = new StashLogger());
         Add(TIMER = new TimerModule());
         Add(new Weather());
-        
+
         Add(SummitStatic.DUPEBOT = new DupeBot());
-        
+        Add(new CrystalPVPBot());
+
+
         Mods.sort((p_Mod1, p_Mod2) -> p_Mod1.getDisplayName().compareTo(p_Mod2.getDisplayName()));
 
         final Preset preset = PresetsManager.Get().getActivePreset();
-        
+
         Mods.forEach(mod ->
         {
             preset.initValuesForMod(mod);
         });
-        
+
         Mods.forEach(mod ->
         {
             mod.init();
         });
     }
 
-    public void Add(Module mod)
-    {
-        try
-        {
-            for (Field field : mod.getClass().getDeclaredFields())
-            {
-                if (Value.class.isAssignableFrom(field.getType()))
-                {
-                    if (!field.isAccessible())
-                    {
+    public void Add(Module mod) {
+        try {
+            for (Field field : mod.getClass().getDeclaredFields()) {
+                if (Value.class.isAssignableFrom(field.getType())) {
+                    if (!field.isAccessible()) {
                         field.setAccessible(true);
                     }
                     final Value<?> val = (Value<?>) field.get(mod);
@@ -225,20 +221,15 @@ public class ModuleManager
                 }
             }
             Mods.add(mod);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public final List<Module> GetModuleList(ModuleType p_Type)
-    {
+
+    public final List<Module> GetModuleList(ModuleType p_Type) {
         List<Module> list = new ArrayList<>();
-        for (Module module : Mods)
-        {
-            if (module.getType().equals(p_Type))
-            {
+        for (Module module : Mods) {
+            if (module.getType().equals(p_Type)) {
                 list.add(module);
             }
         }
@@ -248,58 +239,66 @@ public class ModuleManager
         return list;
     }
 
-    public final List<Module> GetModuleList()
-    {
+    public final List<Module> GetModuleList() {
         return Mods;
     }
 
-    public void OnKeyPress(String string)
-    {
+    public void OnKeyPress(String string) {
         if (string == null || string.isEmpty() || string.equalsIgnoreCase("NONE"))
             return;
-        
+
         Mods.forEach(p_Mod ->
         {
-            if (p_Mod.IsKeyPressed(string))
-            {
+            if (p_Mod.IsKeyPressed(string)) {
                 p_Mod.toggle();
             }
         });
     }
 
-    public Module GetModLike(String p_String)
-    {
-        for (Module l_Mod : Mods)
-        {
+    public Module GetModLike(String p_String) {
+        for (Module l_Mod : Mods) {
             if (l_Mod.GetArrayListDisplayName().toLowerCase().startsWith(p_String.toLowerCase()))
                 return l_Mod;
         }
-        
+
         return null;
     }
 
-    public boolean IgnoreStrictKeybinds()
-    {
+    public boolean IgnoreStrictKeybinds() {
         if (GuiScreen.isAltKeyDown() && !KEYBINDS.Alt.getValue())
             return true;
         if (GuiScreen.isCtrlKeyDown() && !KEYBINDS.Ctrl.getValue())
             return true;
         if (GuiScreen.isShiftKeyDown() && !KEYBINDS.Shift.getValue())
             return true;
-        
+
         return false;
     }
 
-    public int GetTotalModsOfCategory(ModuleType type)
-    {
+    public int GetTotalModsOfCategory(ModuleType type) {
         int total = 0;
-        
-        for (Module mod : Mods)
-        {
+
+        for (Module mod : Mods) {
             if (mod.getType() == type)
                 ++total;
         }
-        
+
         return total;
     }
+
+    public Module GetMod(Class p_Class) {
+        /*Mods.forEach(p_Mod ->
+        {
+           if (p_Mod.getClass() == p_Class)
+               return p_Mod;
+        });*/
+
+        for (Module l_Mod : Mods) {
+            if (l_Mod.getClass() == p_Class)
+                return l_Mod;
+        }
+        SummitMod.log.error("Could not find the class " + p_Class.getName() + " in Mods list");
+        return null;
+    }
 }
+
