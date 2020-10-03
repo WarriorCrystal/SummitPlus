@@ -8,14 +8,14 @@ DC: https://discord.gg/6wk2ptc
 
 Todo: 
 
-Launcher
+- Launcher
 
-Autoplace for BedAura
+- Autoplace for BedAura
 
-Working BoatFly cuz this one aint working
+- Working BoatFly cuz this one aint working
 
-Better AC
+- Better AC
 
-Working nofall
+- Working nofall
 
 ------------------------------
