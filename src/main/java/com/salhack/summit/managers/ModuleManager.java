@@ -43,6 +43,7 @@ public class ModuleManager {
     public void Init() {
         /// Combat
 
+        Add(new Auto32k());
         Add(new BedAura());
         Add(new CriticalsModule());
         Add(new AntiCityBoss());
