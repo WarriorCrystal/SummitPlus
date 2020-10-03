@@ -11,19 +11,13 @@ import net.minecraft.network.play.client.CPacketUseEntity;
 
 public class CriticalsModule extends Module
 {
-    public final Value<Modes> Mode = new Value<Modes>("Mode", new String[] {"M"}, "Mode to change to for criticals", Modes.Packet);
-
-    public enum Modes
-    {
-        Packet,
-        //Jump,
-    }
-
-
+    public final Value<String> Mode = new Value<>("Mode", new String[] { "M" }, "Mode to perform on", "Packet");
     public CriticalsModule()
     {
-        super("Criticals", new String[]
-                { "BS" }, "Tries to crit your oponent on attack by spoofing positions", "NONE", 0xF2190E, ModuleType.COMBAT);
+        super("Criticals", new String[] { "Crits" }, "Deal crits", "NONE", 0x4BCA5C, ModuleType.COMBAT);
+
+        Mode.addString("Packet");
+        Mode.addString("Jump");
     }
 
     @EventHandler
@@ -35,16 +29,15 @@ public class CriticalsModule extends Module
 
             if (l_Packet.getAction() == CPacketUseEntity.Action.ATTACK)
             {
-                //case Jump:
+                //case "Jump":
                     mc.player.jump();
                     //break;
-
                 if (l_Packet.getEntityFromWorld(mc.world) instanceof EntityLivingBase && mc.player.onGround && !mc.gameSettings.keyBindJump.isKeyDown())
                 {
                     switch (Mode.getValue())
                     {
 
-                        case Packet:
+                        case "Packet":
                             mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.1f, mc.player.posZ, false));
                             mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY, mc.player.posZ, false));
                             break;

@@ -5,8 +5,8 @@ import com.salhack.summit.main.Summit;
 import com.salhack.summit.main.SummitStatic;
 import com.salhack.summit.module.bot.CrystalPVPBot;
 import com.salhack.summit.module.chat.Announcer;
-import com.salhack.summit.module.chat.ChatSuffixModule;
 import com.salhack.summit.module.chat.FinnishAnnouncer;
+import com.salhack.summit.module.chat.Suffix;
 import com.salhack.summit.module.chat.popbobsecksdupe;
 import com.salhack.summit.module.combat.*;
 import com.salhack.summit.module.exploit.*;
@@ -83,7 +83,7 @@ public class ModuleManager {
 
         Add(new Announcer());
         Add(new FinnishAnnouncer());
-        Add(new ChatSuffixModule());
+        Add(new Suffix());
         Add(new popbobsecksdupe());
 
         /// Misc
