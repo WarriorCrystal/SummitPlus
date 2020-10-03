@@ -1,5 +1,6 @@
 TODO list
-1:make baritone built-in
+
+1:(make baritone built-in) done
 
 2:add a boat-fly module
 
