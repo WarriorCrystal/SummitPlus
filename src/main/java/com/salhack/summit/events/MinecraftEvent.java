@@ -7,6 +7,13 @@ public class MinecraftEvent extends Cancellable
 {
     private Stage _stage = Stage.Pre;
     private final float partialTicks;
+    private Era era = Era.PRE;
+
+    public Era getEra()
+    {
+        return era;
+    }
+
 
     public MinecraftEvent()
     {
@@ -40,4 +47,12 @@ public class MinecraftEvent extends Cancellable
         Pre,
         Post,
     }
+
+    public enum Era
+    {
+        PRE,
+        PERI,
+        POST,
+    }
 }
+

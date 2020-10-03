@@ -1,4 +1,4 @@
-package com.salhack.summit.module.misc;
+package com.salhack.summit.module.chat;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -32,7 +32,7 @@ public class Announcer extends Module
     
     public Announcer()
     {
-        super("Announcer", new String[] {"Announcer", "Announcer", "Anounce", "Greeter", "Greet"}, "Announces when you do a task", "NONE", -1, ModuleType.MISC);
+        super("Announcer", new String[] {"Announcer", "Announcer", "Anounce", "Greeter", "Greet"}, "Announces when you do a task", "NONE", -1, ModuleType.CHAT);
     }
     
     private String lastMsg = null;

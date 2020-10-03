@@ -118,7 +118,7 @@ public class Module implements EventListener
 
     public enum ModuleType
     {
-        COMBAT, EXPLOIT, MOVEMENT, RENDER, WORLD, MISC, HIDDEN, UI, BOT
+        COMBAT, EXPLOIT, MOVEMENT, RENDER, WORLD, MISC, HIDDEN, UI, BOT, CHAT
     }
 
     public String getDisplayName()

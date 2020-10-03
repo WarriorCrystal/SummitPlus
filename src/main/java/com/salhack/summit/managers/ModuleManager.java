@@ -4,6 +4,9 @@ import com.salhack.summit.SummitMod;
 import com.salhack.summit.main.Summit;
 import com.salhack.summit.main.SummitStatic;
 import com.salhack.summit.module.bot.CrystalPVPBot;
+import com.salhack.summit.module.chat.Announcer;
+import com.salhack.summit.module.chat.ChatSuffixModule;
+import com.salhack.summit.module.chat.FinnishAnnouncer;
 import com.salhack.summit.module.combat.*;
 import com.salhack.summit.module.exploit.*;
 import com.salhack.summit.module.misc.*;
@@ -39,6 +42,8 @@ public class ModuleManager {
     public void Init() {
         /// Combat
 
+        Add(new BedAura());
+        Add(new CriticalsModule());
         Add(new AntiCityBoss());
         Add(AUTOARMOR = new AutoArmor());
         Add(AUTOCITY = new AutoCity());
@@ -59,6 +64,7 @@ public class ModuleManager {
         Add(new Trigger());
         Add(new Velocity());
 
+
         /// Exploit
         Add(new AntiHunger());
         Add(new CoordTPExploit());
@@ -72,8 +78,14 @@ public class ModuleManager {
         Add(REACH = new Reach());
         Add(new Swing());
 
-        /// Misc
+        /// Chat
+
         Add(new Announcer());
+        Add(new FinnishAnnouncer());
+        Add(new ChatSuffixModule());
+
+        /// Misc
+
         Add(ANTIAFK = new AntiAFK());
         Add(new AntiShulkerPlace());
         Add(new AutoEat());
@@ -104,6 +116,8 @@ public class ModuleManager {
         Add(new TotemPopNotifier());
         Add(new VisualRange());
         Add(new XCarry());
+        //Add(new CustomChat());
+
 
         /// Movement
         Add(AUTOWALK = new AutoWalk());
@@ -126,7 +140,8 @@ public class ModuleManager {
         Add(new Sprint());
         Add(new Yaw());
         Add(new WebSpeed());
-
+        Add(new SpeedModule());
+        Add(new StepModule());
 
         /// Render
         Add(new AntiFog());
@@ -300,5 +315,5 @@ public class ModuleManager {
         SummitMod.log.error("Could not find the class " + p_Class.getName() + " in Mods list");
         return null;
     }
-}
 
+}

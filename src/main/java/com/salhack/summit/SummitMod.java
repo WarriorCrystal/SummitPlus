@@ -18,6 +18,7 @@ public final class SummitMod
     public static final String NAME = "Summit+";
     public static final String VERSION = "beta-v0.1";
     public static final String WATERMARK = "Summit+ " + VERSION;
+    public static final String Prefix = ".";
 
     public static final Logger log = LogManager.getLogger("sal");
 

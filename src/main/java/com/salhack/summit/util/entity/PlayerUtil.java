@@ -28,15 +28,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-public class PlayerUtil extends MinecraftInstance
-{
-    public static int GetItemSlot(Item input)
-    {
+public class PlayerUtil extends MinecraftInstance {
+    public static int GetItemSlot(Item input) {
         if (mc.player == null)
             return 0;
 
-        for (int i = 0; i < mc.player.inventoryContainer.getInventory().size(); ++i)
-        {
+        for (int i = 0; i < mc.player.inventoryContainer.getInventory().size(); ++i) {
             if (i == 0 || i == 5 || i == 6 || i == 7 || i == 8)
                 continue;
 
@@ -45,21 +42,18 @@ public class PlayerUtil extends MinecraftInstance
             if (s.isEmpty())
                 continue;
 
-            if (s.getItem() == input)
-            {
+            if (s.getItem() == input) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int GetRecursiveItemSlot(Item input)
-    {
+    public static int GetRecursiveItemSlot(Item input) {
         if (mc.player == null)
             return 0;
 
-        for (int i = mc.player.inventoryContainer.getInventory().size() - 1; i > 0; --i)
-        {
+        for (int i = mc.player.inventoryContainer.getInventory().size() - 1; i > 0; --i) {
             if (i == 0 || i == 5 || i == 6 || i == 7 || i == 8)
                 continue;
 
@@ -68,42 +62,36 @@ public class PlayerUtil extends MinecraftInstance
             if (s.isEmpty())
                 continue;
 
-            if (s.getItem() == input)
-            {
+            if (s.getItem() == input) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int GetItemSlotNotHotbar(Item input)
-    {
+
+    public static int GetItemSlotNotHotbar(Item input) {
         if (mc.player == null)
             return 0;
 
-        for (int i = 9; i < 36; i++)
-        {
+        for (int i = 9; i < 36; i++) {
             final Item item = mc.player.inventory.getStackInSlot(i).getItem();
-            if (item == input)
-            {
+            if (item == input) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int GetItemCount(Item input)
-    {
+    public static int GetItemCount(Item input) {
         if (mc.player == null)
             return 0;
 
         int items = 0;
 
-        for (int i = 0; i < 45; i++)
-        {
+        for (int i = 0; i < 45; i++) {
             final ItemStack stack = mc.player.inventory.getStackInSlot(i);
-            if (stack.getItem() == input)
-            {
+            if (stack.getItem() == input) {
                 items += stack.getCount();
             }
         }
@@ -113,39 +101,32 @@ public class PlayerUtil extends MinecraftInstance
 
     private static Entity en = null;
 
-    public static boolean CanSeeBlock(BlockPos p_Pos)
-    {
+    public static boolean CanSeeBlock(BlockPos p_Pos) {
         if (mc.player == null)
             return false;
 
         if (en == null && mc.world != null)
             en = new EntityChicken(mc.player.world);
 
-        en.setPosition(p_Pos.getX()+0.5, p_Pos.getY()+0.5, p_Pos.getZ()+0.5);
+        en.setPosition(p_Pos.getX() + 0.5, p_Pos.getY() + 0.5, p_Pos.getZ() + 0.5);
 
-        return mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + (double)mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(en.posX, en.posY, en.posZ), false, true, false) == null;
+        return mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + (double) mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(en.posX, en.posY, en.posZ), false, true, false) == null;
     }
 
-    public static boolean isCurrentViewEntity()
-    {
+    public static boolean isCurrentViewEntity() {
         return mc.getRenderViewEntity() == mc.player;
     }
 
-    public static boolean IsEating()
-    {
+    public static boolean IsEating() {
         return mc.player != null && mc.player.getHeldItemMainhand().getItem() instanceof ItemFood && mc.player.isHandActive();
     }
 
-    public static int GetItemInHotbar(Item p_Item)
-    {
-        for (int l_I = 0; l_I < 9; ++l_I)
-        {
+    public static int GetItemInHotbar(Item p_Item) {
+        for (int l_I = 0; l_I < 9; ++l_I) {
             ItemStack l_Stack = mc.player.inventory.getStackInSlot(l_I);
 
-            if (l_Stack != ItemStack.EMPTY)
-            {
-                if (l_Stack.getItem() == p_Item)
-                {
+            if (l_Stack != ItemStack.EMPTY) {
+                if (l_Stack.getItem() == p_Item) {
                     return l_I;
                 }
             }
@@ -154,26 +135,22 @@ public class PlayerUtil extends MinecraftInstance
         return -1;
     }
 
-    public static BlockPos GetLocalPlayerPosFloored()
-    {
+    public static BlockPos GetLocalPlayerPosFloored() {
         if (mc.player == null)
             return BlockPos.ORIGIN;
 
         return new BlockPos(Math.floor(mc.player.posX), Math.floor(mc.player.posY), Math.floor(mc.player.posZ));
     }
 
-    public static BlockPos EntityPosToFloorBlockPos(Entity e)
-    {
+    public static BlockPos EntityPosToFloorBlockPos(Entity e) {
         return new BlockPos(Math.floor(e.posX), Math.floor(e.posY), Math.floor(e.posZ));
     }
 
-    public static float GetHealthWithAbsorption()
-    {
+    public static float GetHealthWithAbsorption() {
         return mc.player.getHealth() + mc.player.getAbsorptionAmount();
     }
 
-    public static boolean IsPlayerInHole()
-    {
+    public static boolean IsPlayerInHole() {
         BlockPos blockPos = GetLocalPlayerPosFloored();
 
         IBlockState blockState = mc.world.getBlockState(blockPos);
@@ -188,11 +165,10 @@ public class PlayerUtil extends MinecraftInstance
             return false;
 
         final BlockPos[] touchingBlocks = new BlockPos[]
-        { blockPos.north(), blockPos.south(), blockPos.east(), blockPos.west() };
+                {blockPos.north(), blockPos.south(), blockPos.east(), blockPos.west()};
 
         int validHorizontalBlocks = 0;
-        for (BlockPos touching : touchingBlocks)
-        {
+        for (BlockPos touching : touchingBlocks) {
             final IBlockState touchingState = mc.world.getBlockState(touching);
             if ((touchingState.getBlock() != Blocks.AIR) && touchingState.isFullBlock())
                 validHorizontalBlocks++;
@@ -204,8 +180,8 @@ public class PlayerUtil extends MinecraftInstance
         return true;
     }
 
-    public static boolean IsPlayerInHole(EntityPlayer who)
-    {
+
+    public static boolean IsPlayerInHole(EntityPlayer who) {
         BlockPos blockPos = new BlockPos(Math.floor(who.posX), Math.floor(who.posY), Math.floor(who.posZ));
 
         IBlockState blockState = mc.world.getBlockState(blockPos);
@@ -220,11 +196,10 @@ public class PlayerUtil extends MinecraftInstance
             return false;
 
         final BlockPos[] touchingBlocks = new BlockPos[]
-        { blockPos.north(), blockPos.south(), blockPos.east(), blockPos.west() };
+                {blockPos.north(), blockPos.south(), blockPos.east(), blockPos.west()};
 
         int validHorizontalBlocks = 0;
-        for (BlockPos touching : touchingBlocks)
-        {
+        for (BlockPos touching : touchingBlocks) {
             final IBlockState touchingState = mc.world.getBlockState(touching);
             if ((touchingState.getBlock() != Blocks.AIR) && touchingState.isFullBlock())
                 validHorizontalBlocks++;
@@ -236,26 +211,20 @@ public class PlayerUtil extends MinecraftInstance
         return true;
     }
 
-    public static boolean isPlayerInHole(Block block)
-    {
+    public static boolean isPlayerInHole(Block block) {
         BlockPos blockPos = GetLocalPlayerPosFloored();
 
         final BlockPos[] touchingBlocks = new BlockPos[]{blockPos.north(), blockPos.south(), blockPos.east(), blockPos.west()};
 
         int validHorizontalBlocks = 0;
-        for (BlockPos touching : touchingBlocks)
-        {
+        for (BlockPos touching : touchingBlocks) {
             final IBlockState touchingState = mc.world.getBlockState(touching);
-            if (touchingState.getBlock() != Blocks.AIR && touchingState.isFullBlock())
-            {
-                if (block.equals(Blocks.OBSIDIAN))
-                {
-                    if (touchingState.getBlock().equals(Blocks.OBSIDIAN) || touchingState.getBlock().equals(Blocks.BEDROCK))
-                    {
+            if (touchingState.getBlock() != Blocks.AIR && touchingState.isFullBlock()) {
+                if (block.equals(Blocks.OBSIDIAN)) {
+                    if (touchingState.getBlock().equals(Blocks.OBSIDIAN) || touchingState.getBlock().equals(Blocks.BEDROCK)) {
                         validHorizontalBlocks++;
                     }
-                }
-                else if (touchingState.getBlock().equals(block)) validHorizontalBlocks++;
+                } else if (touchingState.getBlock().equals(block)) validHorizontalBlocks++;
             }
         }
         if (validHorizontalBlocks < 4) return false;
@@ -263,24 +232,19 @@ public class PlayerUtil extends MinecraftInstance
         return true;
     }
 
-    public static boolean isEntityInHole(EntityPlayer who, Block block)
-    {
+    public static boolean isEntityInHole(EntityPlayer who, Block block) {
         BlockPos blockPos = new BlockPos(Math.floor(who.posX), Math.floor(who.posY), Math.floor(who.posZ));
 
         final BlockPos[] touchingBlocks = new BlockPos[]{blockPos.north(), blockPos.south(), blockPos.east(), blockPos.west()};
 
         int validHorizontalBlocks = 0;
-        for (BlockPos touching : touchingBlocks)
-        {
+        for (BlockPos touching : touchingBlocks) {
             final IBlockState touchingState = mc.world.getBlockState(touching);
-            if (touchingState.getBlock() != Blocks.AIR && touchingState.isFullBlock())
-            {
-                if (block.equals(Blocks.OBSIDIAN))
-                {
+            if (touchingState.getBlock() != Blocks.AIR && touchingState.isFullBlock()) {
+                if (block.equals(Blocks.OBSIDIAN)) {
                     if (touchingState.getBlock().equals(Blocks.OBSIDIAN) || touchingState.getBlock().equals(Blocks.BEDROCK))
                         validHorizontalBlocks++;
-                }
-                else if (touchingState.getBlock().equals(block)) validHorizontalBlocks++;
+                } else if (touchingState.getBlock().equals(block)) validHorizontalBlocks++;
             }
         }
         if (validHorizontalBlocks < 4) return false;
@@ -288,8 +252,7 @@ public class PlayerUtil extends MinecraftInstance
         return true;
     }
 
-    public static boolean IsPlayerTrapped()
-    {
+    public static boolean IsPlayerTrapped() {
         BlockPos l_PlayerPos = GetLocalPlayerPosFloored();
 
         final BlockPos[] l_TrapPositions = {
@@ -303,10 +266,9 @@ public class PlayerUtil extends MinecraftInstance
                 l_PlayerPos.south().up(),
                 l_PlayerPos.east().up(),
                 l_PlayerPos.west().up(),
-                };
+        };
 
-        for (BlockPos l_Pos : l_TrapPositions)
-        {
+        for (BlockPos l_Pos : l_TrapPositions) {
             IBlockState l_State = mc.world.getBlockState(l_Pos);
 
             if (l_State.getBlock() != Blocks.OBSIDIAN && mc.world.getBlockState(l_Pos).getBlock() != Blocks.BEDROCK)
@@ -316,8 +278,7 @@ public class PlayerUtil extends MinecraftInstance
         return true;
     }
 
-    public static boolean IsEntityTrapped(Entity e)
-    {
+    public static boolean IsEntityTrapped(Entity e) {
         BlockPos l_PlayerPos = EntityPosToFloorBlockPos(e);
 
         final BlockPos[] l_TrapPositions = {
@@ -330,10 +291,9 @@ public class PlayerUtil extends MinecraftInstance
                 l_PlayerPos.south().up(),
                 l_PlayerPos.east().up(),
                 l_PlayerPos.west().up(),
-                };
+        };
 
-        for (BlockPos l_Pos : l_TrapPositions)
-        {
+        for (BlockPos l_Pos : l_TrapPositions) {
             IBlockState l_State = mc.world.getBlockState(l_Pos);
 
             if (l_State.getBlock() != Blocks.OBSIDIAN && mc.world.getBlockState(l_Pos).getBlock() != Blocks.BEDROCK)
@@ -343,8 +303,7 @@ public class PlayerUtil extends MinecraftInstance
         return true;
     }
 
-    public static boolean isBlockAbovePlayerHead(EntityPlayer who, boolean tall)
-    {
+    public static boolean isBlockAbovePlayerHead(EntityPlayer who, boolean tall) {
         BlockPos l_PlayerPos = new BlockPos(Math.floor(who.posX), Math.floor(who.posY), Math.floor(who.posZ));
 
         final BlockPos posOne = l_PlayerPos.up().up();
@@ -374,18 +333,15 @@ public class PlayerUtil extends MinecraftInstance
         }
     }
 
-    public enum FacingDirection
-    {
+    public enum FacingDirection {
         North,
         South,
         East,
         West,
     }
 
-    public static FacingDirection GetFacing()
-    {
-        switch (MathHelper.floor((double) (mc.player.rotationYaw * 8.0F / 360.0F) + 0.5D) & 7)
-        {
+    public static FacingDirection GetFacing() {
+        switch (MathHelper.floor((double) (mc.player.rotationYaw * 8.0F / 360.0F) + 0.5D) & 7) {
             case 0:
             case 1:
                 return FacingDirection.South;
@@ -402,8 +358,7 @@ public class PlayerUtil extends MinecraftInstance
         return FacingDirection.North;
     }
 
-    public enum CardinalFacingDirection
-    {
+    public enum CardinalFacingDirection {
         North,
         NorthWest,
         NorthEast,
@@ -414,10 +369,8 @@ public class PlayerUtil extends MinecraftInstance
         West,
     }
 
-    public static CardinalFacingDirection getCardinalFacingDirection()
-    {
-        switch (MathHelper.floor((double) (mc.player.rotationYaw * 8.0F / 360.0F) + 0.5D) & 7)
-        {
+    public static CardinalFacingDirection getCardinalFacingDirection() {
+        switch (MathHelper.floor((double) (mc.player.rotationYaw * 8.0F / 360.0F) + 0.5D) & 7) {
             case 0:
                 return CardinalFacingDirection.South;
             case 1:
@@ -440,14 +393,13 @@ public class PlayerUtil extends MinecraftInstance
 
     final static DecimalFormat Formatter = new DecimalFormat("#.#");
 
-    public static float getSpeedInKM()
-    {
+    public static float getSpeedInKM() {
         final double deltaX = mc.player.posX - mc.player.prevPosX;
         final double deltaZ = mc.player.posZ - mc.player.prevPosZ;
 
         float l_Distance = MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ);
 
-        double l_KMH = Math.floor(( l_Distance/1000.0f ) / ( 0.05f/3600.0f ));
+        double l_KMH = Math.floor((l_Distance / 1000.0f) / (0.05f / 3600.0f));
 
         String l_Formatter = Formatter.format(l_KMH);
 
@@ -457,21 +409,17 @@ public class PlayerUtil extends MinecraftInstance
         return Float.valueOf(l_Formatter);
     }
 
-    public static boolean isInLiquid()
-    {
+    public static boolean isInLiquid() {
         if (Wrapper.GetPlayer() == null)
             return false;
         boolean inLiquid = false;
         int y = (int) ((Wrapper.GetPlayer()).getEntityBoundingBox().minY + 0.02D);
         for (int x = MathHelper.floor((Wrapper.GetPlayer()).getEntityBoundingBox().minX); x < MathHelper
-                .floor((Wrapper.GetPlayer()).getEntityBoundingBox().maxX) + 1; x++)
-        {
+                .floor((Wrapper.GetPlayer()).getEntityBoundingBox().maxX) + 1; x++) {
             for (int z = MathHelper.floor((Wrapper.GetPlayer()).getEntityBoundingBox().minZ); z < MathHelper
-                    .floor((Wrapper.GetPlayer()).getEntityBoundingBox().maxZ) + 1; z++)
-            {
+                    .floor((Wrapper.GetPlayer()).getEntityBoundingBox().maxZ) + 1; z++) {
                 Block block = Wrapper.GetMC().world.getBlockState(new BlockPos(x, y, z)).getBlock();
-                if (block != null && !(block instanceof net.minecraft.block.BlockAir))
-                {
+                if (block != null && !(block instanceof net.minecraft.block.BlockAir)) {
                     if (!(block instanceof net.minecraft.block.BlockLiquid))
                         return false;
                     inLiquid = true;
@@ -481,8 +429,7 @@ public class PlayerUtil extends MinecraftInstance
         return inLiquid;
     }
 
-    public static boolean isOnLiquid()
-    {
+    public static boolean isOnLiquid() {
         final float offset = 0.05f;
         final Minecraft mc = Minecraft.getMinecraft();
 
@@ -514,8 +461,7 @@ public class PlayerUtil extends MinecraftInstance
         return false;
     }
 
-    public static boolean isWearingUseableElytra()
-    {
+    public static boolean isWearingUseableElytra() {
         ItemStack itemstack = mc.player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 
         if (itemstack.getItem() == Items.ELYTRA && ItemElytra.isUsable(itemstack))
@@ -524,16 +470,12 @@ public class PlayerUtil extends MinecraftInstance
         return false;
     }
 
-    public static int GetItemSlotInHotbar(Block web)
-    {
-        for (int l_I = 0; l_I < 9; ++l_I)
-        {
+    public static int GetItemSlotInHotbar(Block web) {
+        for (int l_I = 0; l_I < 9; ++l_I) {
             ItemStack l_Stack = mc.player.inventory.getStackInSlot(l_I);
 
-            if (l_Stack != ItemStack.EMPTY)
-            {
-                if (l_Stack.getItem() instanceof ItemBlock)
-                {
+            if (l_Stack != ItemStack.EMPTY) {
+                if (l_Stack.getItem() instanceof ItemBlock) {
                     ItemBlock block = (ItemBlock) l_Stack.getItem();
 
                     if (block.getBlock().equals(web))
@@ -545,20 +487,15 @@ public class PlayerUtil extends MinecraftInstance
         return -1;
     }
 
-    public static void sendMovementPackets(EventPlayerMotionUpdate event)
-    {
+    public static void sendMovementPackets(EventPlayerMotionUpdate event) {
         final Minecraft mc = Wrapper.GetMC();
 
         boolean flag = mc.player.isSprinting();
 
-        if (flag != mc.player.serverSprintState)
-        {
-            if (flag)
-            {
+        if (flag != mc.player.serverSprintState) {
+            if (flag) {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SPRINTING));
-            }
-            else
-            {
+            } else {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SPRINTING));
             }
 
@@ -567,63 +504,47 @@ public class PlayerUtil extends MinecraftInstance
 
         boolean flag1 = mc.player.isSneaking();
 
-        if (flag1 != mc.player.serverSneakState)
-        {
-            if (flag1)
-            {
+        if (flag1 != mc.player.serverSneakState) {
+            if (flag1) {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
-            }
-            else
-            {
+            } else {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
             }
 
             mc.player.serverSneakState = flag1;
         }
 
-        if (mc.getRenderViewEntity() == mc.player)
-        {
+        if (mc.getRenderViewEntity() == mc.player) {
             double d0 = mc.player.posX - mc.player.lastReportedPosX;
             double d1 = event.getY() - mc.player.lastReportedPosY;
             double d2 = mc.player.posZ - mc.player.lastReportedPosZ;
-            double d3 = (double)(event.getYaw() - mc.player.lastReportedYaw);
-            double d4 = (double)(event.getPitch() - mc.player.lastReportedPitch);
+            double d3 = (double) (event.getYaw() - mc.player.lastReportedYaw);
+            double d4 = (double) (event.getPitch() - mc.player.lastReportedPitch);
             ++mc.player.positionUpdateTicks;
             boolean flag2 = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D || mc.player.positionUpdateTicks >= 20;
             boolean flag3 = d3 != 0.0D || d4 != 0.0D;
 
-            if (mc.player.isRiding())
-            {
+            if (mc.player.isRiding()) {
                 mc.player.connection.sendPacket(new CPacketPlayer.PositionRotation(mc.player.motionX, -999.0D, mc.player.motionZ, event.getYaw(), event.getPitch(), mc.player.onGround));
                 flag2 = false;
-            }
-            else if (flag2 && flag3)
-            {
+            } else if (flag2 && flag3) {
                 mc.player.connection.sendPacket(new CPacketPlayer.PositionRotation(mc.player.posX, event.getY(), mc.player.posZ, event.getYaw(), event.getPitch(), mc.player.onGround));
-            }
-            else if (flag2)
-            {
+            } else if (flag2) {
                 mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, event.getY(), mc.player.posZ, mc.player.onGround));
-            }
-            else if (flag3)
-            {
+            } else if (flag3) {
                 mc.player.connection.sendPacket(new CPacketPlayer.Rotation(event.getYaw(), event.getPitch(), mc.player.onGround));
-            }
-            else if (mc.player.prevOnGround != mc.player.onGround)
-            {
+            } else if (mc.player.prevOnGround != mc.player.onGround) {
                 mc.player.connection.sendPacket(new CPacketPlayer(mc.player.onGround));
             }
 
-            if (flag2)
-            {
+            if (flag2) {
                 mc.player.lastReportedPosX = mc.player.posX;
                 mc.player.lastReportedPosY = event.getY();
                 mc.player.lastReportedPosZ = mc.player.posZ;
                 mc.player.positionUpdateTicks = 0;
             }
 
-            if (flag3)
-            {
+            if (flag3) {
                 mc.player.lastReportedYaw = event.getYaw();
                 mc.player.lastReportedPitch = event.getPitch();
             }
@@ -633,4 +554,22 @@ public class PlayerUtil extends MinecraftInstance
         }
     }
 
+
+    public static void PacketFacePitchAndYaw(float p_Pitch, float p_Yaw) {
+        boolean l_IsSprinting = mc.player.isSprinting();
+
+        if (l_IsSprinting != mc.player.serverSprintState) {
+            if (l_IsSprinting) {
+                mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SPRINTING));
+            } else {
+                mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SPRINTING));
+            }
+
+            mc.player.serverSprintState = l_IsSprinting;
+            try {
+                Thread.sleep(1);
+            } catch (Exception e) {
+            }
+        }
+    }
 }

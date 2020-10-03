@@ -1,6 +1,7 @@
 package com.salhack.summit.events.player;
 
 import com.salhack.summit.events.MinecraftEvent;
+import com.salhack.summit.main.Wrapper;
 import net.minecraft.entity.MoverType;
 
 public class EventPlayerMove extends MinecraftEvent
@@ -45,4 +46,8 @@ public class EventPlayerMove extends MinecraftEvent
         this.X = 0;
         this.Z = 0;
     }
+
+
+
 }
+
