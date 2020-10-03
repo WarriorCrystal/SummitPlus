@@ -133,7 +133,6 @@ public class ModuleManager {
         Add(new HighJump());
         Add(new IceSpeed());
         Add(new LevitationControl());
-        Add(new NoFall());
         Add(NOROTATE = new NoRotate());
         Add(NOSLOW = new NoSlow());
         Add(new Parkour());
