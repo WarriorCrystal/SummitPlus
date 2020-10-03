@@ -30,7 +30,7 @@ public class ClickGuiS extends SalGuiScreen
         addModMenuComponent(ModuleType.UI,         610, 10);
         addModMenuComponent(ModuleType.WORLD,      730, 10);
         addModMenuComponent(ModuleType.BOT,        10, 340);
-        addModMenuComponent(ModuleType.CHAT,       40, 400);
+        addModMenuComponent(ModuleType.CHAT,       40, 440);
         
         for (int i = 0; i < 100; ++i)
         {
