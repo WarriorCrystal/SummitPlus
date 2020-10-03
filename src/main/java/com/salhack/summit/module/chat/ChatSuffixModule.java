@@ -9,7 +9,7 @@ import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraftforge.client.model.ICustomModelLoader;
 
 public final class ChatSuffixModule extends Module {
-    public final Value<Modes> Mode = new Value<Modes>("Mode", new String[]{"M"}, "pro chat append", Modes.SummitPlus);
+    public final Value<Modes> Mode = new Value<Modes>("Mode", new String[]{"M"}, "suffix", Modes.SummitPlus);
 
 
     public enum Modes {
@@ -22,8 +22,6 @@ public final class ChatSuffixModule extends Module {
                 { "ChatSuffix" }, "ChatSuffix", "NONE", 0xB49FAD, ModuleType.CHAT);
         setMetaData(getMetaData());
 
-        Mode.addString("nhack");
-        Mode.addString("Impactplus");
     }
 
     @Override
