@@ -117,7 +117,7 @@ public class Summit
     public static void SendMessage(String string)
     {
         if (Wrapper.GetMC().ingameGUI != null || Wrapper.GetPlayer() == null)
-            Wrapper.GetMC().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(ChatFormatting.RED + "[Summit]: " + string));
+            Wrapper.GetMC().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(ChatFormatting.RED + "[Summit+]: " + string));
     }
 
     public static HudManager GetHudManager()
