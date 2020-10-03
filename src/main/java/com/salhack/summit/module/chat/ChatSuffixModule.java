@@ -9,25 +9,26 @@ import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraftforge.client.model.ICustomModelLoader;
 
 public final class ChatSuffixModule extends Module {
-    public final Value<Modes> mode = new Value<Modes>("Mode", new String[]{"M"}, "pro chat append", Modes.standard);
+    public final Value<Modes> Mode = new Value<Modes>("Mode", new String[]{"M"}, "pro chat append", Modes.SummitPlus);
 
 
-    // I added nhack and impact+ cuz y not lol
     public enum Modes {
-        standard,
-        nhack,
-        Impactplus,
+        SummitPlus,
     }
 
-    public ChatSuffixModule() {
+    public ChatSuffixModule()
+    {
         super("ChatSuffix", new String[]
-                        {""}, "Makes your chat have a string appended on the end", "NONE",
-                0xDB2485, ModuleType.CHAT);
+                { "ChatSuffix" }, "ChatSuffix", "NONE", 0xB49FAD, ModuleType.CHAT);
+        setMetaData(getMetaData());
+
+        Mode.addString("nhack");
+        Mode.addString("Impactplus");
     }
 
     @Override
     public String getMetaData() {
-        return mode.getValue().toString();
+        return Mode.getValue().toString();
     }
 
     @EventHandler
@@ -38,20 +39,13 @@ public final class ChatSuffixModule extends Module {
 
         String l_Message = "";
 
-        switch (mode.getValue()) {
-            case standard: {
-                l_Message = "  | \ua731\u1d1c\u1d0d\u1d0d\u026a\u1d1b\u002b";
+        switch (Mode.getValue()) {
+            case SummitPlus: {
+                l_Message = " - \ua731\u1d1c\u1d0d\u1d0d\u026a\u1d1b\u002b";
 
                 break;
             }
-            case nhack: {
-                l_Message = "  | \u0274\u029c\u1d00\u1d04\u1d0b";
-                break;
-            }
-            case Impactplus: {
-                l_Message = "  | \u026a\u1d0d\u1d18\u1d00\u1d04\u1d1b\u002b";
-                break;
-            }
+
         }
 
         p_Event.cancel();
