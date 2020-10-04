@@ -2,6 +2,11 @@ package com.salhack.summit.mixin.client.blocks;
 
 import com.salhack.summit.SummitMod;
 import com.salhack.summit.events.blocks.EventBlockCollisionBoundingBox;
+import com.salhack.summit.events.blocks.EventBlockGetRenderLayer;
+import com.salhack.summit.events.blocks.EventCanCollideCheck;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.util.BlockRenderLayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

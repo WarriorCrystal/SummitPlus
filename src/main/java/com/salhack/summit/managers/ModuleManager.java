@@ -50,6 +50,7 @@ public class ModuleManager {
         Add(AUTOARMOR = new AutoArmor());
         Add(AUTOCITY = new AutoCity());
         Add(AUTOCRYSTAL = new AutoCrystal());
+        Add(new AutoCrystal2());
         Add(new AutoLog());
         Add(AURA = new Aura());
         Add(AUTOTOTEM = new AutoTotem());
@@ -119,8 +120,6 @@ public class ModuleManager {
         Add(new TotemPopNotifier());
         Add(new VisualRange());
         Add(new XCarry());
-        //Add(new CustomChat());
-
 
         /// Movement
         Add(AUTOWALK = new AutoWalk());

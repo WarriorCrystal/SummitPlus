@@ -47,14 +47,12 @@ public class Auto32k extends Module
 
     enum Modes
     {
-        Hopper,
         Dispenser,
     }
 
     public Auto32k() {
         super("Hopper32k", new String[]{"a32k"}, "tsar bomba", "NONE", 0x4BCA5C, ModuleType.COMBAT);
 
-        Mode.addString("Hopper");
         Mode.addString("Dispenser");
     }
 
@@ -93,7 +91,7 @@ public class Auto32k extends Module
 
         if (l_Pair.getSecond() != ItemStack.EMPTY)
         {
-            SendMessage(String.format("%s[Auto32k] Found shulker %s", ChatFormatting.LIGHT_PURPLE, l_Pair.getSecond().getDisplayName()));
+            SendMessage(String.format("%s Found shulker %s", ChatFormatting.LIGHT_PURPLE, l_Pair.getSecond().getDisplayName()));
         }
 
         HopperPosition = null;
