@@ -14,8 +14,6 @@ Todo:
 
 - Working BoatFly cuz this one aint working
 
-- Better AC
-
 - Working nofall
 
 ------------------------------
