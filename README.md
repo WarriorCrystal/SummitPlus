@@ -17,3 +17,4 @@ Todo:
 - Working nofall
 
 ------------------------------
+- client only had one dev nurkkis and pretty much not much good shit in the client also FUCK kelarotta/pcpbcb
