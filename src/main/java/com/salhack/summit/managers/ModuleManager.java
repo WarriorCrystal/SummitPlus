@@ -107,7 +107,6 @@ public class ModuleManager {
         Add(CHESTSTEALER = new ChestStealer());
         Add(CHORUSFRUITBYPASS = new ChorusFruitBypass());
         Add(new ChestSwap());
-        Add(DISCORDRPC = new DiscordRPC());
         Add(new FakePlayer());
         Add(FRIENDS = new Friends());
         Add(new GlobalLocation());
